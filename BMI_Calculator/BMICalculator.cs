@@ -26,7 +26,21 @@ namespace BMI_Calculator
         private void BMI_CalculatorForm_Load(object sender, EventArgs e)
         {
             Clear_Numeric_Keyboard();
+            Active_Label = null;
             BMICalculatorTableLayoutPanel.Visible = false;
+
+           this.Size = new Size(320,480);
+        }
+        private void CalculatorForm_Click(object sender, EventArgs e)
+        {
+            Clear_Numeric_Keyboard();
+            if (Active_Label != null)
+            {
+                Active_Label.BackColor = Color.White;
+            }
+            Active_Label = null;
+            BMICalculatorTableLayoutPanel.Visible = false;
+
         }
 
 
@@ -95,12 +109,18 @@ namespace BMI_Calculator
                         break;
 
                     case "Done":
-                        resultValue = float.Parse(outputStringResult);
-                        resultValue = (float)(Math.Round(resultValue, 1));
-                        if (resultValue < 0.1f)
+
+                        if(outputStringResult == string.Empty)
                         {
-                            resultValue = 0.1f;
+                            outputStringResult = "0";
                         }
+
+                        resultValue = float.Parse(outputStringResult);
+                        //resultValue = (float)(Math.Round(resultValue, 1));
+                        //if (resultValue < 0.1f)
+                        //{
+                        //    resultValue = 0.1f;
+                        //}
                         Active_Label.Text = resultValue.ToString();
                         Clear_Numeric_Keyboard();
                         BMICalculatorTableLayoutPanel.Visible = false;
@@ -137,6 +157,10 @@ namespace BMI_Calculator
                 resultLabel.Text = Active_Label.Text;
                 outputStringResult = resultLabel.Text;
             }
+            BMICalculatorTableLayoutPanel.Location = new Point(12, Active_Label.Location.Y + 55);
+            BMICalculatorTableLayoutPanel.BringToFront();
         }
+
+     
     }
 }
