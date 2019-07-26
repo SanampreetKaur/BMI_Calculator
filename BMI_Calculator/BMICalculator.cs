@@ -17,11 +17,18 @@ namespace BMI_Calculator
         public string outputStringResult { get; set; }
         public float resultValue { get; set; }
         public bool decimalResult {get; set;}
-
+        public Label Active_Label { get; set; }
         public BMI_CalculatorForm()
         {
             InitializeComponent();
         }
+
+        private void BMI_CalculatorForm_Load(object sender, EventArgs e)
+        {
+            Clear_Numeric_Keyboard();
+            BMICalculatorTableLayoutPanel.Visible = false;
+        }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -88,19 +95,18 @@ namespace BMI_Calculator
                         break;
 
                     case "Done":
-                        if (!decimalResult)
-                        {
-                            outputStringResult = outputStringResult.Remove(outputStringResult.IndexOf('.') + 1);
-
-                        }
                         resultValue = float.Parse(outputStringResult);
+                        resultValue = (float)(Math.Round(resultValue, 1));
                         if (resultValue < 0.1f)
                         {
                             resultValue = 0.1f;
                         }
-                        OutputLabel.Text = resultValue.ToString();
+                        Active_Label.Text = resultValue.ToString();
                         Clear_Numeric_Keyboard();
                         BMICalculatorTableLayoutPanel.Visible = false;
+                        Active_Label.BackColor = Color.White;
+                        Active_Label = null;
+
                         break;
                 }
             }
@@ -111,18 +117,26 @@ namespace BMI_Calculator
             outputStringResult = "0";
             resultLabel.Text = "0";
             decimalResult = false;
+
             resultValue = 0.0f;
         }
 
-        private void BMI_CalculatorForm_Load(object sender, EventArgs e)
-        {
-            Clear_Numeric_Keyboard();
-            BMICalculatorTableLayoutPanel.Visible = false;
-        }
 
-        private void outputLabel(object sender, EventArgs e)
+        private void Active_Label_Click(object sender, EventArgs e)
         {
+            if(Active_Label != null) 
+            {
+                Active_Label.BackColor = Color.White;
+                Active_Label = null;
+            }
+            Active_Label = sender as Label;
+            Active_Label.BackColor = Color.LightBlue;
             BMICalculatorTableLayoutPanel.Visible = true;
+            if(Active_Label.Text != "0")
+            {
+                resultLabel.Text = Active_Label.Text;
+                outputStringResult = resultLabel.Text;
+            }
         }
     }
 }
