@@ -325,7 +325,7 @@
             this.OutputLabel.Font = new System.Drawing.Font("Arial", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OutputLabel.Location = new System.Drawing.Point(166, 24);
             this.OutputLabel.Name = "OutputLabel";
-            this.OutputLabel.Size = new System.Drawing.Size(113, 59);
+            this.OutputLabel.Size = new System.Drawing.Size(101, 59);
             this.OutputLabel.TabIndex = 1;
             this.OutputLabel.Tag = "result";
             this.OutputLabel.Text = "0";
@@ -335,7 +335,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(23F, 45F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 544);
+            this.ClientSize = new System.Drawing.Size(766, 544);
             this.Controls.Add(this.OutputLabel);
             this.Controls.Add(this.BMICalculatorTableLayoutPanel);
             this.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
