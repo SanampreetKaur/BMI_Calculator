@@ -18,6 +18,10 @@ namespace BMI_Calculator
         public float resultValue { get; set; }
         public bool decimalResult {get; set;}
         public Label Active_Label { get; set; }
+
+        public Animation animationField;
+
+
         public BMI_CalculatorForm()
         {
             InitializeComponent();
@@ -30,6 +34,10 @@ namespace BMI_Calculator
             BMICalculatorTableLayoutPanel.Visible = false;
 
            this.Size = new Size(320,480);
+
+
+
+            animationField = Animation.IDLE;
         }
         private void CalculatorForm_Click(object sender, EventArgs e)
         {
@@ -39,7 +47,9 @@ namespace BMI_Calculator
                 Active_Label.BackColor = Color.White;
             }
             Active_Label = null;
-            BMICalculatorTableLayoutPanel.Visible = false;
+            
+            animationField = Animation.DOWN;
+            AnimationTimer.Enabled = true;
 
         }
 
@@ -123,9 +133,12 @@ namespace BMI_Calculator
                         //}
                         Active_Label.Text = resultValue.ToString();
                         Clear_Numeric_Keyboard();
-                        BMICalculatorTableLayoutPanel.Visible = false;
+                       
                         Active_Label.BackColor = Color.White;
                         Active_Label = null;
+                        animationField = Animation.DOWN;
+                        AnimationTimer.Enabled = true;
+        
 
                         break;
                 }
@@ -157,10 +170,63 @@ namespace BMI_Calculator
                 resultLabel.Text = Active_Label.Text;
                 outputStringResult = resultLabel.Text;
             }
-            BMICalculatorTableLayoutPanel.Location = new Point(12, Active_Label.Location.Y + 55);
+        //    BMICalculatorTableLayoutPanel.Location = new Point(12, Active_Label.Location.Y + 55);
             BMICalculatorTableLayoutPanel.BringToFront();
+            
+            AnimationTimer.Enabled = true;
+
+            animationField = Animation.UP;
+
+
         }
 
-     
+        /// <summary>
+        /// this is the event handler for animation timer tick event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void AnimationTimer_Tick(object sender, EventArgs e)
+        {
+            switch (animationField)
+            {
+                case Animation.IDLE:
+                    break;
+                case Animation.UP:
+                    UpKeyboard();
+                    break;
+                case Animation.DOWN:
+                    DownKeyboard();
+                    break;
+
+            }
+
+        }
+
+        private void UpKeyboard()
+        {
+            var currentLocation = BMICalculatorTableLayoutPanel.Location;
+            currentLocation = new Point(currentLocation.X, currentLocation.Y - 20);
+            BMICalculatorTableLayoutPanel.Location = currentLocation;
+            if (currentLocation.Y <= Active_Label.Location.Y + 55)
+            {
+                BMICalculatorTableLayoutPanel.Location = new Point(currentLocation.X, Active_Label.Location.Y + 55);
+                AnimationTimer.Enabled = false;
+                animationField = Animation.IDLE;
+            }
+        }
+        private void DownKeyboard()
+        {
+            var currentLocation = BMICalculatorTableLayoutPanel.Location;
+            currentLocation = new Point(currentLocation.X, currentLocation.Y + 20);
+            BMICalculatorTableLayoutPanel.Location = currentLocation;
+            if (currentLocation.Y >=466)
+            {
+                BMICalculatorTableLayoutPanel.Location = new Point(currentLocation.X, 466);
+                AnimationTimer.Enabled = false;
+                animationField = Animation.IDLE;
+                BMICalculatorTableLayoutPanel.Visible = false;
+            }
+        }
     }
 }

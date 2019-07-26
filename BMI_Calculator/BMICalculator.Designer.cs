@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.BMICalculatorTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.resultLabel = new System.Windows.Forms.Label();
             this.threeButton = new System.Windows.Forms.Button();
@@ -46,6 +47,7 @@
             this.zeroButton = new System.Windows.Forms.Button();
             this.Weight_label = new System.Windows.Forms.Label();
             this.height_label = new System.Windows.Forms.Label();
+            this.AnimationTimer = new System.Windows.Forms.Timer(this.components);
             this.BMICalculatorTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,7 +73,7 @@
             this.BMICalculatorTableLayoutPanel.Controls.Add(this.ClearButton, 3, 2);
             this.BMICalculatorTableLayoutPanel.Controls.Add(this.DoneButton, 3, 3);
             this.BMICalculatorTableLayoutPanel.Controls.Add(this.zeroButton, 0, 4);
-            this.BMICalculatorTableLayoutPanel.Location = new System.Drawing.Point(12, 191);
+            this.BMICalculatorTableLayoutPanel.Location = new System.Drawing.Point(9, 391);
             this.BMICalculatorTableLayoutPanel.Name = "BMICalculatorTableLayoutPanel";
             this.BMICalculatorTableLayoutPanel.RowCount = 5;
             this.BMICalculatorTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -321,7 +323,7 @@
             this.Weight_label.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Weight_label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Weight_label.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Weight_label.Location = new System.Drawing.Point(182, 39);
+            this.Weight_label.Location = new System.Drawing.Point(182, 63);
             this.Weight_label.Name = "Weight_label";
             this.Weight_label.Size = new System.Drawing.Size(101, 47);
             this.Weight_label.TabIndex = 1;
@@ -334,7 +336,7 @@
             this.height_label.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.height_label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.height_label.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.height_label.Location = new System.Drawing.Point(182, 106);
+            this.height_label.Location = new System.Drawing.Point(182, 134);
             this.height_label.Name = "height_label";
             this.height_label.Size = new System.Drawing.Size(101, 48);
             this.height_label.TabIndex = 1;
@@ -342,11 +344,16 @@
             this.height_label.Text = "0";
             this.height_label.Click += new System.EventHandler(this.Active_Label_Click);
             // 
+            // AnimationTimer
+            // 
+            this.AnimationTimer.Interval = 16;
+            this.AnimationTimer.Tick += new System.EventHandler(this.AnimationTimer_Tick);
+            // 
             // BMI_CalculatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(23F, 45F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 424);
+            this.ClientSize = new System.Drawing.Size(573, 635);
             this.Controls.Add(this.height_label);
             this.Controls.Add(this.Weight_label);
             this.Controls.Add(this.BMICalculatorTableLayoutPanel);
@@ -384,6 +391,7 @@
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Label Weight_label;
         private System.Windows.Forms.Label height_label;
+        private System.Windows.Forms.Timer AnimationTimer;
     }
 }
 
